@@ -6,24 +6,59 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] float movSpeed;
+    float horizontal;
+    float vertical;
+    float moveLimiter = 0.7f;
+
+    [Header("Weapon")]
+    [SerializeField] float bulletSpeed;
+
     // [SerializeField] float movAccel;
 
-
+    Rigidbody2D Player;
+    public GameObject GreenBlob;
+    public Rigidbody2D Bullet;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Player = GetComponent<Rigidbody2D>();
+        Player.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+        if (Input.GetMouseButtonDown(0))
+            Fire();
+    }
+
+    private void FixedUpdate() 
+    {
+        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+    {
+        // limit movement speed diagonally, so you move at 70% speed
+        horizontal *= moveLimiter;
+        vertical *= moveLimiter;
+    }
+        Move(new Vector2(horizontal, vertical));
     }
 
     void Move(Vector2 _dir)
     {
         Vector2 velocity = _dir * movSpeed;
-        transform.Translate(velocity);
+        Player.velocity = velocity;
+    }
+
+    void Fire()
+    {
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = Input.mousePosition - pos;
+        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+
+        var projectile = Instantiate(Bullet, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
+        Vector2 BulletVelocity = new Vector2(dir.x, dir.y).normalized * bulletSpeed;
+        projectile.velocity = BulletVelocity;
     }
 }
