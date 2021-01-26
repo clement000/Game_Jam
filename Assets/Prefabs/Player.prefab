@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b526dde259b83b34fa90f7260ed982ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 31.28
+  movSpeed: 20
   bulletSpeed: 2.01
   GreenBlob: {fileID: 0}
   Bullet: {fileID: 0}
