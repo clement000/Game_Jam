@@ -63,9 +63,13 @@ public class RedBlob_Behaviour : MonoBehaviour
                             //initiate a jump that will land right next to the target
                             jumpVector = (target.transform.position - transform.position) / jumpDuration;
                         }
-                        else//target is the player : jump towards him
+                        if (target.tag == "Player")//target is the player : jump towards him
                         {
-                            jumpVector = (target.transform.position - transform.position) * jumpDistance / jumpDuration;
+                            jumpDistance = Random.Range(minJumpDistance, maxJumpDistance);
+                            Vector3 vector = target.transform.position - transform.position;
+                            vector.z = 0;
+                            jumpVector = vector.normalized * jumpDistance / jumpDuration;
+                            Debug.Log(jumpVector.magnitude);
                         }
                     }
                 }
@@ -98,6 +102,7 @@ public class RedBlob_Behaviour : MonoBehaviour
             }
             else
             {
+                Debug.Log("Vector used to jump = " + jumpVector.magnitude);
                 Move(jumpVector);
             }
         }
@@ -123,9 +128,10 @@ public class RedBlob_Behaviour : MonoBehaviour
         return selectedTarget;
     }
 
-    void Move(Vector2 speed)
+    void Move(Vector3 speed)
     {
-        Vector2 velocity = speed;
-        redBlob.velocity = velocity;
+        Vector2 speed2D = new Vector2(speed.x, speed.y);
+        redBlob.velocity = speed2D;
+        Debug.Log("velocity used to jump = " + speed2D.magnitude);
     }
 }
