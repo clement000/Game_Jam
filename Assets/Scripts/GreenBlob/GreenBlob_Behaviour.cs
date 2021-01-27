@@ -10,7 +10,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
     public float averageSplitTime = 30f;
     public float minimalDensityToSplit = 15f;
     GridSystem grid;
-    
+
+    public bool isBeeingJumpedOn = false;
 
     private float jumpDuration = 0.5f;
     private float jumpTimer = 0f;
@@ -44,67 +45,70 @@ public class GreenBlob_Behaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
-        if (isIdle)
+    {   if (!isBeeingJumpedOn)
         {
-            if (jumpTimer > idleTime)//it is time to jump !
+            grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
+            if (isIdle)
             {
-                jumpTimer = 0f;
-                isIdle = false;
-                // Initialize the Jump                
-                float privileged = PrivilegedDirection();
-                theta = RandomAngle(privileged);
-                //theta = Random.Range(0f, 2 * Mathf.PI);
-                distance = Random.Range(minJumpDistance, maxJumpDistance);
-                jumpVector.x = Mathf.Cos(theta) * distance;
-                jumpVector.y = Mathf.Sin(theta) * distance;
-                lastIdleX = transform.position.x;
-                lastIdleY = transform.position.y;
-                
-            }
-        }
-        else
-        {
-            if (jumpTimer > jumpDuration)//it is time to stop jumping !
-            {
-                jumpTimer = 0f;
-                isIdle = true;
-                idleTime = Random.Range(averageIdleTime - averageIdleTime / 2, averageIdleTime + averageIdleTime / 2);
-                if (blobWasInit)
+                if (jumpTimer > idleTime)//it is time to jump !
                 {
-                    grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+                    jumpTimer = 0f;
+                    isIdle = false;
+                    // Initialize the Jump                
+                    float privileged = PrivilegedDirection();
+                    theta = RandomAngle(privileged);
+                    //theta = Random.Range(0f, 2 * Mathf.PI);
+                    distance = Random.Range(minJumpDistance, maxJumpDistance);
+                    jumpVector.x = Mathf.Cos(theta) * distance / jumpDuration;
+                    jumpVector.y = Mathf.Sin(theta) * distance / jumpDuration;
+                    lastIdleX = transform.position.x;
+                    lastIdleY = transform.position.y;
+
                 }
-                grid.AddBlobToHeatMap(transform.position);
-                Move(new Vector2(0, 0));
-                blobWasInit = true;
             }
             else
             {
-                Move(jumpVector);
-            }
-        }
-        int xBlob, yBlob;
-        grid.GetXY(transform.position, out xBlob, out yBlob);
-        if (grid.value(xBlob, yBlob) < 8)
-        {
-            if (canSplit)
-            { 
-                Split();
-                canSplit = false;
-                splitTimer = 0f;
-                splitTime = Random.Range(1.5f, 1) * averageSplitTime;
-            }
-            else
-            {
-                if (splitTimer > splitTime)
+                if (jumpTimer > jumpDuration)//it is time to stop jumping !
                 {
-                    canSplit = true;
+                    jumpTimer = 0f;
+                    isIdle = true;
+                    idleTime = Random.Range(averageIdleTime - averageIdleTime / 2, averageIdleTime + averageIdleTime / 2);
+                    if (blobWasInit)
+                    {
+                        grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+                    }
+                    grid.AddBlobToHeatMap(transform.position);
+                    Move(new Vector2(0, 0));
+                    blobWasInit = true;
+                }
+                else
+                {
+                    Move(jumpVector);
                 }
             }
-            splitTimer += Time.deltaTime;
+            int xBlob, yBlob;
+            grid.GetXY(transform.position, out xBlob, out yBlob);
+            if (grid.value(xBlob, yBlob) < 8)
+            {
+                if (canSplit)
+                {
+                    Split();
+                    canSplit = false;
+                    splitTimer = 0f;
+                    splitTime = Random.Range(1.5f, 1) * averageSplitTime;
+                }
+                else
+                {
+                    if (splitTimer > splitTime)
+                    {
+                        canSplit = true;
+                    }
+                }
+                splitTimer += Time.deltaTime;
+            }
+            jumpTimer += Time.deltaTime;
         }
-        jumpTimer += Time.deltaTime;
+        
     }
     void Move(Vector2 translation2)
     {
