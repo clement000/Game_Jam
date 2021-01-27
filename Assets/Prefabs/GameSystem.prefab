@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4190116093796178789}
   - component: {fileID: 4190116093796178786}
+  - component: {fileID: 1377237470541594517}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -43,3 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007edd3906fa8b34d8911d91d0dd9937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1377237470541594517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4190116093796178787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fdca1ded10d3645938fe2a5dc78baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletDisplay: {fileID: 619760115295334002, guid: f90baa7794cc2ef4c9570d162811b6f4, type: 3}
+  bulletNumber: 10

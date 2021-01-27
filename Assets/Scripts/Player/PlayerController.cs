@@ -31,7 +31,11 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         if (Input.GetMouseButtonDown(0))
-            Fire();
+            if (GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber > 0)
+            {
+                Fire();
+                GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber -= 1;
+            }
     }
 
     private void FixedUpdate() 
@@ -60,5 +64,7 @@ public class PlayerController : MonoBehaviour
         var projectile = Instantiate(Bullet, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
         Vector2 BulletVelocity = new Vector2(dir.x, dir.y).normalized * bulletSpeed;
         projectile.velocity = BulletVelocity;
+
+
     }
 }

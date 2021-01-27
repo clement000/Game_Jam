@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7120201033690542564}
   - component: {fileID: 7120201033690542587}
   - component: {fileID: 7120201033690542565}
+  - component: {fileID: -5511143705326755764}
   - component: {fileID: -2338920529717687124}
   - component: {fileID: 8404675864664129923}
   m_Layer: 7
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7120201033690542586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7120201034185309844}
@@ -102,6 +103,20 @@ MonoBehaviour:
   bulletSpeed: 3
   GreenBlob: {fileID: 827936747949251446, guid: 0dd4cf21ec248d8bb8147cc8ccad01e0, type: 3}
   Bullet: {fileID: 6534496552065504848, guid: 5198d967818289df4b1cfc5ba7319573, type: 3}
+--- !u!114 &-5511143705326755764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120201033690542586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1768a124f71de7e43b031dfdf79497eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.5
+  speed: 0.02
 --- !u!50 &-2338920529717687124
 Rigidbody2D:
   serializedVersion: 4

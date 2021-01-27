@@ -7,7 +7,7 @@ public class BulletDropping : MonoBehaviour
     [SerializeField] public float minDelay;
     [SerializeField] public float maxDelay;
 
-    public GameObject BulletDrop;
+    public Rigidbody2D BulletDrop;
 
     private float delay;
     private float timer;
@@ -24,7 +24,8 @@ public class BulletDropping : MonoBehaviour
 
         if (timer > delay) {
             timer = 0;
-            Instantiate(BulletDrop, gameObject.transform);
+            var Bullet = Instantiate(BulletDrop, gameObject.transform.position, BulletDrop.transform.rotation);
+
         }
 
     }

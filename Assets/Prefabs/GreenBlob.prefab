@@ -115,6 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5c4dc5230a91112b9180ee45b5a090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minDelay: 5.15
+  maxDelay: 150
+  BulletDrop: {fileID: -9081135510725528574, guid: 5ff6ab21040a7c5b285a95365059b4fa, type: 3}
 --- !u!58 &-7264635475438801468
 CircleCollider2D:
   m_ObjectHideFlags: 0
