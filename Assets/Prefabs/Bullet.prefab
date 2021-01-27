@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1927545800710181864}
   - component: {fileID: 2286165879619080393}
   - component: {fileID: 6534496552065504848}
-  - component: {fileID: 7253619988106234550}
   - component: {fileID: 5510137598059145473}
   - component: {fileID: -204956258113514088}
+  - component: {fileID: 3705193643369952253}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
@@ -107,22 +107,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &7253619988106234550
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012584973584142750}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!114 &5510137598059145473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,3 +226,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!70 &3705193643369952253
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012584973584142750}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00059580704, y: 0.0000000052508184}
+  m_Size: {x: 0.13456774, y: 0.059211954}
+  m_Direction: 1
