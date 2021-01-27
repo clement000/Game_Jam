@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 dir = Input.mousePosition - pos;
-        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         var projectile = Instantiate(Bullet, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
         Vector2 BulletVelocity = new Vector2(dir.x, dir.y).normalized * bulletSpeed;

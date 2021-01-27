@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b526dde259b83b34fa90f7260ed982ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 20
-  bulletSpeed: 2.01
-  GreenBlob: {fileID: 0}
-  Bullet: {fileID: 0}
+  movSpeed: 5
+  bulletSpeed: 3
+  GreenBlob: {fileID: 827936747949251446, guid: 0dd4cf21ec248d8bb8147cc8ccad01e0, type: 3}
+  Bullet: {fileID: 6534496552065504848, guid: 5198d967818289df4b1cfc5ba7319573, type: 3}
 --- !u!50 &-2338920529717687124
 Rigidbody2D:
   serializedVersion: 4
