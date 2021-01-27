@@ -135,14 +135,14 @@ public class GridSystem
         }
     }
 
-    public void AddBlobToHeatMap(Vector3 worldposition, bool debug = false)
+    public void AddBlobToHeatMap(Vector3 worldposition, int amount = 1, bool debug = false)
     {
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
                 Vector3 cellPosition = GetWorldPosition(x, y);
-                float value = gaussian2D(worldposition.x, worldposition.y, cellPosition.x, cellPosition.y);
+                float value = amount * gaussian2D(worldposition.x, worldposition.y, cellPosition.x, cellPosition.y);
                 if (value > 1E-10)
                 {
                     Add(x, y, value);

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1142146250061252034}
   m_Layer: 3
   m_Name: GreenBlob
-  m_TagString: Enemy
+  m_TagString: GreenBlob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f3e6af08051e946ac87c8c3c320133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageIdleTime: 10
+  averageIdleTime: 1
   minJumpDistance: 0.5
   maxJumpDistance: 1.5
   averageSplitTime: 60
