@@ -45,7 +45,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   if (!isBeeingJumpedOn)
+    {   
+        if (!isBeeingJumpedOn)
         {
             grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
             if (isIdle)
@@ -108,7 +109,6 @@ public class GreenBlob_Behaviour : MonoBehaviour
             }
             jumpTimer += Time.deltaTime;
         }
-        
     }
     void Move(Vector2 translation2)
     {
@@ -181,6 +181,11 @@ public class GreenBlob_Behaviour : MonoBehaviour
     {
         Debug.Log("split !");
         Instantiate(GreenBlob);
+    }
+    public void Jumped()
+    {
+        isBeeingJumpedOn = true;
+        Debug.Log("I'm beeing jumped on !");
     }
 }
 

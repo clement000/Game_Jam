@@ -16,14 +16,18 @@ public class RedBlob_Behaviour : MonoBehaviour
     private GameObject target, selectedTarget;
 
     private bool isIdle = true;
+    private bool isChasing = false;
     private float timer = 0f;
     private float idleTime, jumpDistance, jumpTheta, targetDistance;
     Vector3 jumpVector;
     RaycastHit2D hit;
+    private Rigidbody2D redBlob;
     // Start is called before the first frame update
     void Start()
     {
         idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
+        redBlob = GetComponent<Rigidbody2D>();
+        redBlob.velocity = new Vector2(0,0);
     }
 
     // Update is called once per frame
@@ -31,23 +35,37 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         if (isIdle)
         {
+            target = LookForTarget();
+            if (target != null)
+            {
+                idleTime = averageIdleTime / 2;
+            }
             if (timer > idleTime)
             {
+                Debug.Log("Time to jump !");
                 isIdle = false;
-                target = LookForTarget();
                 timer = 0f;
                 if (target != null)
                 {
+                    Debug.Log("Found a target ! " + target.name);
                     //Check if the target can be reached in 1 jump (it is in reach, and there is no obstacle between the two)
                     targetDistance = Vector3.Distance(target.transform.position, transform.position);
                     hit = Physics2D.Raycast(transform.position, target.transform.position - transform.position, targetDistance);
-                    if (targetDistance < maxJumpDistance && hit.transform.position == target.transform.position)
+                    if (true)//targetDistance < maxJumpDistance && hit.transform.position == target.transform.position)
                     {
+                        Debug.Log("Chasing " + target.name);
+                        Debug.Log("Chasing /" + target.tag + "/");
+                        isChasing = true;
                         if (target.tag == "GreenBlob")
                         {
-                            target.GetComponent<GreenBlob_Behaviour>().isBeeingJumpedOn = true;
+                            Debug.Log(target.name + " is a GreenBlob");
+                            target.GetComponent<GreenBlob_Behaviour>().Jumped();
                             //initiate a jump that will land right next to the target
-                            jumpVector = (target.transform.position - transform.position) * jumpDuration;
+                            jumpVector = (target.transform.position - transform.position) / jumpDuration;
+                        }
+                        else//target is the player : jump towards him
+                        {
+                            jumpVector = (target.transform.position - transform.position) * jumpDistance / jumpDuration;
                         }
                     }
                 }
@@ -65,7 +83,18 @@ public class RedBlob_Behaviour : MonoBehaviour
         {
             if (timer > jumpDuration)
             {
-                //end the jump
+                timer = 0f;
+                isIdle = true;
+                if (isChasing)// if the blob is chasing a target, it jumps faster
+                {
+                    idleTime = Random.Range(1.25f, 1.75f) * averageIdleTime;
+                }
+                else
+                {
+                    idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
+                }
+                Move(new Vector2(0, 0));
+                isChasing = false;
             }
             else
             {
@@ -94,9 +123,9 @@ public class RedBlob_Behaviour : MonoBehaviour
         return selectedTarget;
     }
 
-    void Move(Vector2 translation2)
+    void Move(Vector2 speed)
     {
-        Vector2 velocity = translation2;
-        GreenBlob.velocity = velocity;
+        Vector2 velocity = speed;
+        redBlob.velocity = velocity;
     }
 }
