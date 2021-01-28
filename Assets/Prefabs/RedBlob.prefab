@@ -134,7 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef386bb880a3a7d4e9d0cbcf948a41b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
-  averageIdleTime: 1
-  minJumpDistance: 1
-  maxJumpDistance: 1
+  detectionRadius: 1.5
+  averageIdleTime: 2
+  minJumpDistance: 0.5
+  maxJumpDistance: 1.5
+  health: 10
+  ableToEatTime: 30
+  isAbleToEat: 1

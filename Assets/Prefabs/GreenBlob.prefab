@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f3e6af08051e946ac87c8c3c320133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageIdleTime: 1
-  minJumpDistance: 0.5
-  maxJumpDistance: 1.5
-  averageSplitTime: 60
-  minimalDensityToSplit: 15
+  averageIdleTime: 5
+  minJumpDistance: 0.2
+  maxJumpDistance: 0.8
+  averageSplitTime: 15
+  minimalDensityToSplit: 20
   health: 10
   isBeeingJumpedOn: 0
 --- !u!114 &-6187011408435964912
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDelay: 15.01
-  maxDelay: 250
+  maxDelay: 150
   BulletDrop: {fileID: -9081135510725528574, guid: 5ff6ab21040a7c5b285a95365059b4fa, type: 3}
 --- !u!58 &-7264635475438801468
 CircleCollider2D:
