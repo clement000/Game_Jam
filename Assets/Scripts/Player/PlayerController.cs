@@ -12,12 +12,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapon")]
     [SerializeField] float bulletSpeed;
+    [SerializeField] float alternatBulletSpeed;
 
     // [SerializeField] float movAccel;
 
     Rigidbody2D Player;
     public GameObject GreenBlob;
-    public Rigidbody2D Bullet;
+    public Rigidbody2D Bullet, BigBullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,12 @@ public class PlayerController : MonoBehaviour
             {
                 Fire();
                 GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber -= 1;
+            }
+        if (Input.GetMouseButtonDown(1))
+            if (GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber > 9)
+            {
+                AlternateFire();
+                GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber -= 10;
             }
     }
 
@@ -66,5 +73,16 @@ public class PlayerController : MonoBehaviour
         projectile.velocity = BulletVelocity;
 
 
+    }
+    void AlternateFire()
+    {
+        Debug.Log("BIGBULLET");
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = Input.mousePosition - pos;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        var projectile = Instantiate(BigBullet, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
+        Vector2 BulletVelocity = new Vector2(dir.x, dir.y).normalized * alternatBulletSpeed;
+        projectile.velocity = BulletVelocity;
     }
 }
