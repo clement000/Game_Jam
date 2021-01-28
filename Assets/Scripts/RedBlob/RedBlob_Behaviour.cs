@@ -25,16 +25,21 @@ public class RedBlob_Behaviour : MonoBehaviour
     Vector3 jumpVector;
     RaycastHit2D hit;
     private Rigidbody2D redBlob;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
         redBlob = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("isAngry", false);
+
         if (isIdle)
         {
             if (ableToEatTimer > ableToEatTime)
@@ -185,6 +190,7 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         //play the animation
         target.GetComponent<GreenBlob_Behaviour>().RemoveBlob();
+        anim.SetTrigger("Eat");
         target = null;
         RedBlob_Behaviour newRedBlob = Instantiate(redBlob).GetComponent<RedBlob_Behaviour>();
         newRedBlob.transform.position = transform.position;
@@ -197,6 +203,7 @@ public class RedBlob_Behaviour : MonoBehaviour
         health -= amount;
         if (health < 0)
         {
+            anim.SetTrigger("Dead");
             Kill();
         }
     }
