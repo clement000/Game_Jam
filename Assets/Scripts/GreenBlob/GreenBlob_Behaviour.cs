@@ -189,8 +189,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private void Split()
     {
         anim.SetTrigger("divise");
-        GameObject newGreenBlob = Instantiate(GreenBlob.gameObject);
-        newGreenBlob.transform.position = transform.position;
+        Invoke("EndSplit", 1.2f);
     }
     public void Jumped()
     {
@@ -234,5 +233,15 @@ public class GreenBlob_Behaviour : MonoBehaviour
         grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
         grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
         Destroy(GreenBlob.gameObject);
+    }
+
+    void EndSplit()
+    {
+        GameObject newGreenBlob = Instantiate(GreenBlob.gameObject);
+        Vector3 offset = new Vector3(0.1f, 0);
+        newGreenBlob.transform.position = transform.position + offset;
+        transform.position -= offset;
+        jumpTimer = -2f;
+        newGreenBlob.GetComponent<GreenBlob_Behaviour>().jumpTimer = -2f;
     }
 }
