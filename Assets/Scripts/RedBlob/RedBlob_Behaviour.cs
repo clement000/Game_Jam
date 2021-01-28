@@ -187,6 +187,7 @@ public class RedBlob_Behaviour : MonoBehaviour
         target.GetComponent<GreenBlob_Behaviour>().RemoveBlob();
         target = null;
         RedBlob_Behaviour newRedBlob = Instantiate(redBlob).GetComponent<RedBlob_Behaviour>();
+        newRedBlob.transform.position = transform.position;
         newRedBlob.unableToEat();
     }
 

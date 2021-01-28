@@ -162,7 +162,7 @@ public class GridSystem
 
     private float gaussian2D(float xmean, float ymean, float x, float y)
     {
-        float sigma = 1;
+        float sigma = 0.7f;
 
         return (1 / sigma * Mathf.Sqrt(2 * Mathf.PI) * Mathf.Exp(-Mathf.Pow(x - xmean, 2) / (2 * Mathf.Pow(sigma, 2))) * (1 / sigma * Mathf.Sqrt(2 * Mathf.PI) * Mathf.Exp(-Mathf.Pow(y - ymean, 2) / (2 * Mathf.Pow(sigma, 2)))));
     }
