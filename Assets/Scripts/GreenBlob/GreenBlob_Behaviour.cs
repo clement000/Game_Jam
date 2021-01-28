@@ -185,7 +185,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
     }
     private void Split()
     {
-        Instantiate(GreenBlob);
+        GameObject newGreenBlob = Instantiate(GreenBlob.gameObject);
+        newGreenBlob.transform.position = transform.position;
     }
     public void Jumped()
     {
