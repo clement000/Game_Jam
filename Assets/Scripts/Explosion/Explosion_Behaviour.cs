@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionBehaviour : MonoBehaviour
+public class Explosion_Behaviour : MonoBehaviour
 {
     float timer = 0f;
     float expireTimer = 3f;

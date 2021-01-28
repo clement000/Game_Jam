@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class BigBulletBehavior : MonoBehaviour
+public class BigBulletBehaviour : MonoBehaviour
 {
     public float explosionRadius;
+    public GameObject Explosion;
     // Start is called before the first frame update
     void Start()
     {
 
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -22,7 +21,8 @@ public class BigBulletBehavior : MonoBehaviour
     {
         GameObject[] targets = LookForTargets();
         Destroy(gameObject);
-        //Instantiate Explosion
+        Explosion = Instantiate(Explosion);
+        Explosion.transform.position = transform.position;
         foreach(GameObject target in targets)
         {
             if (target.tag == "GreenBlob")
