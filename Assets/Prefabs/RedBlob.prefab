@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 1.5
-  averageIdleTime: 2
+  averageIdleTime: 1.5
   minJumpDistance: 0.5
   maxJumpDistance: 1.5
   health: 10

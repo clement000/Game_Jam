@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f3e6af08051e946ac87c8c3c320133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageIdleTime: 5
+  averageIdleTime: 4
   minJumpDistance: 0.2
   maxJumpDistance: 0.8
   averageSplitTime: 15
