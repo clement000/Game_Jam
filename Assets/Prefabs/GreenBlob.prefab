@@ -97,11 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f3e6af08051e946ac87c8c3c320133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageIdleTime: 10
+  averageIdleTime: 1
   minJumpDistance: 0.5
   maxJumpDistance: 1.5
   averageSplitTime: 60
   minimalDensityToSplit: 15
+  health: 10
   isBeeingJumpedOn: 0
 --- !u!58 &-7264635475438801468
 CircleCollider2D:

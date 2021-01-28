@@ -9,6 +9,7 @@ public class RedBlob_Behaviour : MonoBehaviour
     public float minJumpDistance = 1f;
     public float maxJumpDistance = 1f;
     public float health = 10f;
+    public float ableToEatTime = 30f;
 
     private float jumpDuration = 0.5f;
 
@@ -20,7 +21,6 @@ public class RedBlob_Behaviour : MonoBehaviour
     private bool isChasing = false;
     public bool isAbleToEat = true;
     private float timer = 0f, ableToEatTimer = 0f;
-    private float ableToEatTime = 30f;
     private float idleTime, jumpDistance, jumpTheta, targetDistance;
     Vector3 jumpVector;
     RaycastHit2D hit;
@@ -60,13 +60,17 @@ public class RedBlob_Behaviour : MonoBehaviour
                     {
                         jumpVector = JumpTowardsTargetInit(target);
                     }
-                    else if (targetDistance < maxJumpDistance && isAbleToEat == true)//the target is a blob, that can be reached in one jump
+                    else if (targetDistance < maxJumpDistance && isAbleToEat == true)//the target is a blob, that can be reached in one jump, and the redblob can eat
                     {
                         jumpVector = JumpOnGreenBlobInit(target);
                     }
                     else if (isAbleToEat == true)//target is too far : jump towards it
                     {
                         jumpVector = JumpTowardsTargetInit(target);
+                    }
+                    else
+                    {
+                        jumpVector = RandomJumpInit();
                     }
                 }
                 else
@@ -102,10 +106,19 @@ public class RedBlob_Behaviour : MonoBehaviour
             else//we are in the middle of a jump : continue moving normally
             {
                 Move(jumpVector);
+                if (isChasing && target == null)
+                {
+                    isChasing = false;
+                }
             }
         }
         timer += Time.deltaTime;
         ableToEatTimer += Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)//when colliding with a wall, bounce
+    {
+        jumpVector = -1 * jumpVector;
     }
 
     private GameObject LookForTarget()

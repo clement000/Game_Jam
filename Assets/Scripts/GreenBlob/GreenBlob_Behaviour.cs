@@ -17,6 +17,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private float jumpDuration = 0.5f;
     private float jumpTimer = 0f;
     private float splitTimer = 0f;
+    private float jumpedTimer = 0f;
     private bool isIdle = true;
     private bool canSplit = false;
     private float idleTime;
@@ -108,6 +109,11 @@ public class GreenBlob_Behaviour : MonoBehaviour
         else
         {
             Stop();
+            if (jumpedTimer > 3 * averageIdleTime)
+            {
+                isBeeingJumpedOn = false;
+            }
+            jumpedTimer += Time.deltaTime;
         }
     }
     void Move(Vector2 translation2)
@@ -179,13 +185,12 @@ public class GreenBlob_Behaviour : MonoBehaviour
     }
     private void Split()
     {
-        Debug.Log("split !");
         Instantiate(GreenBlob);
     }
     public void Jumped()
     {
         isBeeingJumpedOn = true;
-        Debug.Log("I'm beeing jumped on !");
+        jumpedTimer = 0f;
     }
 
     private void Stop()
@@ -207,7 +212,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     {
         grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
         grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
-        Destroy(GreenBlob);
+        Destroy(GreenBlob.gameObject);
     }
 
     public void DamageBlob(float amount)
