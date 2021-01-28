@@ -33,6 +33,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
 
     private Rigidbody2D GreenBlob;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +45,12 @@ public class GreenBlob_Behaviour : MonoBehaviour
         lastIdleX = transform.position.x;
         lastIdleY = transform.position.y;
         splitTime = Random.Range(1.5f, 1) * averageSplitTime;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         if (!isBeeingJumpedOn)
         {
             grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
@@ -57,7 +60,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
                 {
                     jumpTimer = 0f;
                     isIdle = false;
-                    // Initialize the Jump                
+                    // Initialize the Jump
                     jumpVector = JumpInit();
                     lastIdleX = transform.position.x;
                     lastIdleY = transform.position.y;
@@ -185,6 +188,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     }
     private void Split()
     {
+        anim.SetTrigger("divise");
         GameObject newGreenBlob = Instantiate(GreenBlob.gameObject);
         newGreenBlob.transform.position = transform.position;
     }
@@ -232,6 +236,3 @@ public class GreenBlob_Behaviour : MonoBehaviour
         Destroy(GreenBlob.gameObject);
     }
 }
-
-
-
