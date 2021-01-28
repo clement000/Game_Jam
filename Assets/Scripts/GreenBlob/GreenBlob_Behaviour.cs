@@ -8,7 +8,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
     public float minJumpDistance = 1f;
     public float maxJumpDistance = 1f;
     public float averageSplitTime = 30f;
-    public float minimalDensityToSplit = 15f;
+    public float minimalDensityToSplit = 8f;
+    public float health = 10f;
     GridSystem grid;
 
     public bool isBeeingJumpedOn = false;
@@ -56,12 +57,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
                     jumpTimer = 0f;
                     isIdle = false;
                     // Initialize the Jump                
-                    float privileged = PrivilegedDirection();
-                    theta = RandomAngle(privileged);
-                    //theta = Random.Range(0f, 2 * Mathf.PI);
-                    distance = Random.Range(minJumpDistance, maxJumpDistance);
-                    jumpVector.x = Mathf.Cos(theta) * distance / jumpDuration;
-                    jumpVector.y = Mathf.Sin(theta) * distance / jumpDuration;
+                    jumpVector = JumpInit();
                     lastIdleX = transform.position.x;
                     lastIdleY = transform.position.y;
 
@@ -73,30 +69,30 @@ public class GreenBlob_Behaviour : MonoBehaviour
                 {
                     jumpTimer = 0f;
                     isIdle = true;
-                    idleTime = Random.Range(averageIdleTime - averageIdleTime / 2, averageIdleTime + averageIdleTime / 2);
-                    if (blobWasInit)
+                    idleTime = Random.Range(averageIdleTime * 0.5f, averageIdleTime * 1.5f);
+                    if (blobWasInit)//only remove the blob if he was already added (this should be in start, but for some reason it does not work when put there...)
                     {
                         grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
                     }
                     grid.AddBlobToHeatMap(transform.position);
-                    Move(new Vector2(0, 0));
-                    blobWasInit = true;
+                    Stop();
+                    blobWasInit = true;//if the blob was not yet added, it now is
                 }
-                else
+                else//we are in the middle of a jump
                 {
                     Move(jumpVector);
                 }
             }
             int xBlob, yBlob;
             grid.GetXY(transform.position, out xBlob, out yBlob);
-            if (grid.value(xBlob, yBlob) < 8)
+            if (grid.value(xBlob, yBlob) < minimalDensityToSplit)
             {
                 if (canSplit)
                 {
                     Split();
                     canSplit = false;
                     splitTimer = 0f;
-                    splitTime = Random.Range(1.5f, 1) * averageSplitTime;
+                    splitTime = Random.Range(0.8f, 1.2f) * averageSplitTime;
                 }
                 else
                 {
@@ -105,9 +101,13 @@ public class GreenBlob_Behaviour : MonoBehaviour
                         canSplit = true;
                     }
                 }
-                splitTimer += Time.deltaTime;
+                splitTimer += Time.deltaTime;//only increment the split timer if the blob is in a situation where he could split
             }
             jumpTimer += Time.deltaTime;
+        }
+        else
+        {
+            Stop();
         }
     }
     void Move(Vector2 translation2)
@@ -116,7 +116,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
         GreenBlob.velocity = velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)//when colliding with a wall, bounce
     {
         jumpVector = -1 * jumpVector;
     }
@@ -186,6 +186,44 @@ public class GreenBlob_Behaviour : MonoBehaviour
     {
         isBeeingJumpedOn = true;
         Debug.Log("I'm beeing jumped on !");
+    }
+
+    private void Stop()
+    {
+        Move(new Vector2(0, 0));
+    }
+
+    private Vector2 JumpInit()
+    {
+        float privileged = PrivilegedDirection();
+        theta = RandomAngle(privileged);
+        distance = Random.Range(minJumpDistance, maxJumpDistance);
+        jumpVector.x = Mathf.Cos(theta) * distance / jumpDuration;
+        jumpVector.y = Mathf.Sin(theta) * distance / jumpDuration;
+        return jumpVector;
+    }
+
+    public void RemoveBlob()//just removes the blob from the game
+    {
+        grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
+        grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+        Destroy(GreenBlob);
+    }
+
+    public void DamageBlob(float amount)
+    {
+        health -= amount;
+        if (health < 0)
+        {
+            Kill();
+        }
+    }
+
+    public void Kill()//kills the blob (with death animation)
+    {
+        grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
+        grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+        Destroy(GreenBlob.gameObject);
     }
 }
 
