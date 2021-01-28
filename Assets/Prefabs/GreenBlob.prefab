@@ -75,7 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f,
+    type: 3}
   m_Color: {r: 0.038848326, g: 0.9150943, b: 0.12114994, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +104,8 @@ MonoBehaviour:
   maxJumpDistance: 1.5
   averageSplitTime: 60
   minimalDensityToSplit: 15
+  health: 10
+  isBeeingJumpedOn: 0
 --- !u!114 &-6187011408435964912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDelay: 5.15
   maxDelay: 150
-  BulletDrop: {fileID: -9081135510725528574, guid: 5ff6ab21040a7c5b285a95365059b4fa, type: 3}
+  BulletDrop: {fileID: -9081135510725528574, guid: 5ff6ab21040a7c5b285a95365059b4fa,
+    type: 3}
 --- !u!58 &-7264635475438801468
 CircleCollider2D:
   m_ObjectHideFlags: 0

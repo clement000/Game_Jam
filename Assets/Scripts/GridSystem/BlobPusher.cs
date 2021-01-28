@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlobPusher : MonoBehaviour
 {
     bool init = false;
+    public int weight = 4;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,8 +19,7 @@ public class BlobPusher : MonoBehaviour
         if (!init)
         {
             GridSystem grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
-            grid.AddBlobToHeatMap(transform.position, 4);
-            Debug.Log("Added a BlobPusher !");
+            grid.AddBlobToHeatMap(transform.position, weight);
             init = true;
         }
     }
