@@ -29,7 +29,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private float theta;
     private float distance;
 
-    private bool blobWasInit = false;
+    public bool blobWasInit = false;
 
     private Rigidbody2D GreenBlob;
 
@@ -44,7 +44,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
         idleTime = Random.Range(averageIdleTime - averageIdleTime / 2, averageIdleTime + averageIdleTime / 2);
         lastIdleX = transform.position.x;
         lastIdleY = transform.position.y;
-        splitTime = Random.Range(1.5f, 1) * averageSplitTime;
+        splitTime = Random.Range(0.8f, 1.2f) * averageSplitTime;
         anim = GetComponent<Animator>();
 
         GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbGreenBlob += 1;
@@ -63,18 +63,18 @@ public class GreenBlob_Behaviour : MonoBehaviour
                 grid.GetXY(transform.position, out xBlob, out yBlob);
                 if (grid.value(xBlob, yBlob) < minimalDensityToSplit)
                 {
-                    if (canSplit)
+                    if (canSplit)//split and reset the splitTimer
                     {
                         Split();
                         canSplit = false;
-                        splitTimer = 0f;
                         splitTime = Random.Range(0.8f, 1.2f) * averageSplitTime;
                     }
                     else
                     {
-                        if (splitTimer > splitTime)
+                        if (splitTimer > splitTime)//begin splitting
                         {
                             canSplit = true;
+                            splitTimer = -5f;
                         }
                     }
                     splitTimer += Time.deltaTime;//only increment the split timer if the blob is in a situation where he could split
@@ -244,10 +244,14 @@ public class GreenBlob_Behaviour : MonoBehaviour
 
     void EndSplit()
     {
+        grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
         GameObject newGreenBlob = Instantiate(GreenBlob.gameObject);
         Vector3 offset = new Vector3(0.1f, 0);
         newGreenBlob.transform.position = transform.position + offset;
         transform.position -= offset;
         newGreenBlob.GetComponent<GreenBlob_Behaviour>().jumpTimer = -2f;
+        newGreenBlob.GetComponent<GreenBlob_Behaviour>().canSplit = false;
+        grid.AddBlobToHeatMap(newGreenBlob.transform.position);
+        newGreenBlob.GetComponent<GreenBlob_Behaviour>().blobWasInit = true;
     }
 }
