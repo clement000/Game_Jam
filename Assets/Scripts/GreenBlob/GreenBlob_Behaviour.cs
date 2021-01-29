@@ -189,7 +189,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private void Split()
     {
         anim.SetTrigger("divise");
-        Invoke("EndSplit", 1.2f);
+        Invoke("EndSplit", 1.18f);
     }
     public void Jumped()
     {

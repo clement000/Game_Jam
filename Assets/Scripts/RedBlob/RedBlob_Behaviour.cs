@@ -93,7 +93,8 @@ public class RedBlob_Behaviour : MonoBehaviour
                 if (isChasing && target != null)
                 {
                     idleTime = Random.Range(0.5f, 0.75f) * averageIdleTime;// if the blob is chasing a target, it jumps faster
-                    Vector3 vector = target.transform.position - transform.position;
+                    Vector3 offset = new Vector3(0.1f, 0);
+                    Vector3 vector = target.transform.position - offset - transform.position;
                     if (vector.magnitude < 0.01 && target.gameObject.tag == "GreenBlob")
                     {
                         Eat(target);
@@ -172,7 +173,8 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         target.GetComponent<GreenBlob_Behaviour>().Jumped();
         //initiate a jump that will land right next to the target
-        jumpVector = (target.transform.position - transform.position) / jumpDuration;
+        Vector3 offset = new Vector3(0.1f, 0);
+        jumpVector = (target.transform.position - offset - transform.position) / jumpDuration;
         return jumpVector;
     }
 
