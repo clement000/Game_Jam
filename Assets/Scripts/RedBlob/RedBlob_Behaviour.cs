@@ -20,6 +20,7 @@ public class RedBlob_Behaviour : MonoBehaviour
     private bool isIdle = true;
     private bool isChasing = false;
     public bool isAbleToEat = true;
+    public bool isDead = false;
     private float timer = 0f, ableToEatTimer = 0f;
     private float idleTime, jumpDistance, jumpTheta, targetDistance;
     Vector3 offset = new Vector3(0.2f, 0);
@@ -152,7 +153,10 @@ public class RedBlob_Behaviour : MonoBehaviour
     void Move(Vector3 speed)
     {
         Vector2 speed2D = speed;
-        redBlob.velocity = speed2D;
+        if (isDead)
+            redBlob.velocity = Vector2.zero;
+        else
+            redBlob.velocity = speed2D;
     }
 
     public void NewlySplitBlob()
@@ -216,6 +220,15 @@ public class RedBlob_Behaviour : MonoBehaviour
         //play the animation
 
         GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbRedBlob -= 1;
+        anim.SetTrigger("Dead");
+        isDead = true;
+        GetComponent<Collider2D>().enabled = false;
+        timer = -2f;
+        Invoke("RemoveBlob", 1f);
+    }
+
+    public void RemoveBlob()
+    {
         Destroy(redBlob.gameObject);
     }
 
