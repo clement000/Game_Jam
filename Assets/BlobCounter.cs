@@ -22,7 +22,6 @@ public class BlobCounter : MonoBehaviour
     void Update()
     {
         slider.value = (float)nbGreenBlob / ((float)nbGreenBlob + (float)nbRedBlob);
-        Debug.Log(slider.value);
         GreenCounter.text = nbGreenBlob.ToString();
         RedCounter.text = nbRedBlob.ToString();
     }
