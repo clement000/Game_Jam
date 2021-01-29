@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 8fae06d8f77ad4a33a2d327fadd77c84
+guid: 60081e44e59209281b06170fae5c4a8b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5884520630070798059
-    second: Slime_Red_Calm_Sheet_0
+      213: -5424743319850113870
+    second: Farmer_back_Sheet_0
   - first:
-      213: -4600134566097889411
-    second: Slime_Red_Calm_Sheet_1
+      213: -967703777508132378
+    second: Farmer_back_Sheet_1
   - first:
-      213: -618847273609642904
-    second: Slime_Red_Calm_Sheet_2
+      213: -3774858604864653112
+    second: Farmer_back_Sheet_2
   - first:
-      213: -2488029289148332375
-    second: Slime_Red_Calm_Sheet_3
+      213: -7657958370763320496
+    second: Farmer_back_Sheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_Red_Calm_Sheet_0
+      name: Farmer_back_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,20 +117,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be6e3d4e5540aa150800000000000000
-      internalID: 5884520630070798059
+      spriteID: 2b429ae21b077b4b0800000000000000
+      internalID: -5424743319850113870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Red_Calm_Sheet_1
+      name: Farmer_back_Sheet_1
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d775db41cf90920c0800000000000000
-      internalID: -4600134566097889411
+      spriteID: 6e9f2dd9a860292f0800000000000000
+      internalID: -967703777508132378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Red_Calm_Sheet_2
+      name: Farmer_back_Sheet_2
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86c3746fea96967f0800000000000000
-      internalID: -618847273609642904
+      spriteID: 8c837b359120d9bc0800000000000000
+      internalID: -3774858604864653112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Red_Calm_Sheet_3
+      name: Farmer_back_Sheet_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
-        height: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a6cb8d2b8eb87dd0800000000000000
-      internalID: -2488029289148332375
+      spriteID: 0535ce57f6779b590800000000000000
+      internalID: -7657958370763320496
       vertices: []
       indices: 
       edges: []

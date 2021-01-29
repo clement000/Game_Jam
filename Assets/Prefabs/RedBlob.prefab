@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2885199064654599322}
   - component: {fileID: 4828656824512136032}
   - component: {fileID: 6279607010439511846}
+  - component: {fileID: -5245023788771704567}
   m_Layer: 3
   m_Name: RedBlob
   m_TagString: Enemy
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
+  m_Sprite: {fileID: 5884520630070798059, guid: 8fae06d8f77ad4a33a2d327fadd77c84, type: 3}
   m_Color: {r: 0.9137255, g: 0.09781068, b: 0.039215676, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6279607010439511846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +142,22 @@ MonoBehaviour:
   health: 10
   ableToEatTime: 30
   isAbleToEat: 1
+--- !u!95 &-5245023788771704567
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4060542418779628072}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 605b9c1e7d99634fd97f727ccc27a2e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
