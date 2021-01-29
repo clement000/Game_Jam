@@ -138,7 +138,7 @@ MonoBehaviour:
   detectionRadius: 1.5
   averageIdleTime: 1.5
   minJumpDistance: 0.5
-  maxJumpDistance: 1.5
+  maxJumpDistance: 1
   health: 10
   ableToEatTime: 30
   isAbleToEat: 1

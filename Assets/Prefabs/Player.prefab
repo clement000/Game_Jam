@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5511143705326755764}
   - component: {fileID: -2338920529717687124}
   - component: {fileID: 8404675864664129923}
+  - component: {fileID: 1433264377}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -101,8 +102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movSpeed: 2
   bulletSpeed: 5
+  alternatBulletSpeed: 3
   GreenBlob: {fileID: 827936747949251446, guid: 0dd4cf21ec248d8bb8147cc8ccad01e0, type: 3}
   Bullet: {fileID: 6534496552065504848, guid: 5198d967818289df4b1cfc5ba7319573, type: 3}
+  BigBullet: {fileID: 6534496552065504848, guid: f12865714e70ccd4082e92ef6a0a69de, type: 3}
 --- !u!114 &-5511143705326755764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +157,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!95 &1433264377
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120201033690542586}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e47054e9bb78471278ce70ca9cf0ea5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7120201034185309800
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +235,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

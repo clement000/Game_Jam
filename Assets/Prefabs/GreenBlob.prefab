@@ -102,7 +102,7 @@ MonoBehaviour:
   averageIdleTime: 4
   minJumpDistance: 0.2
   maxJumpDistance: 0.8
-  averageSplitTime: 5
+  averageSplitTime: 15
   minimalDensityToSplit: 20
   health: 10
   isBeeingJumpedOn: 0

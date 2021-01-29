@@ -34,10 +34,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("isFront", false);
-        anim.SetBool("isBack", false);
-        anim.SetBool("isLeft", false);
-        anim.SetBool("isRight", false);
         // Pour faire regarder le fermier dans la bonne direction, il faut changer la valeur de "is..."
         //qui convient en réécrivant une des lignes au dessus avec true à la place de false. De base il regarde en face.
         //Je voyais bien soit il regarde dans la direction qu'il tire, soit dans la direction qu'il marche
@@ -46,6 +42,35 @@ public class PlayerController : MonoBehaviour
 
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+
+        if (horizontal > 0) {
+            anim.SetBool("isRight", true);
+            anim.SetBool("isFront", false);
+            anim.SetBool("isBack", false);
+            anim.SetBool("isLeft", false);
+        }
+        if (horizontal < 0)
+        {
+            anim.SetBool("isLeft", true);
+            anim.SetBool("isFront", false);
+            anim.SetBool("isBack", false);
+            anim.SetBool("isRight", false);
+        }
+        if (vertical < 0) 
+        {
+            anim.SetBool("isFront", true);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isBack", false);
+            anim.SetBool("isRight", false);
+        }
+        if (vertical > 0) 
+        { 
+            anim.SetBool("isBack", true);
+            anim.SetBool("isFront", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", false);
+        }
+
         if (Input.GetMouseButtonDown(0))
             if (GameObject.Find("GameSystem").GetComponent<BulletCounter>().bulletNumber > 0)
             {

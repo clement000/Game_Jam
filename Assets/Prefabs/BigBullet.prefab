@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85755e8f5a5dffc4b826dc9c2bd78766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 3
+  explosionRadius: 1.8
   Explosion: {fileID: 402731623051234784, guid: 1b3283047796b3e4bba63fcffb3a9933, type: 3}
 --- !u!50 &6534496552065504848
 Rigidbody2D:
