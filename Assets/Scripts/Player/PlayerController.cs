@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = Input.mousePosition - pos;
         float mouseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        Debug.Log(mouseAngle);
 
         if (mouseAngle > -45 && mouseAngle < 45) {
             anim.SetBool("isRight", true);
