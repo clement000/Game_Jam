@@ -18,16 +18,30 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D Player;
     public GameObject GreenBlob;
     public Rigidbody2D Bullet;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         Player = GetComponent<Rigidbody2D>();
         Player.freezeRotation = true;
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        anim.SetBool("isFront", false);
+        anim.SetBool("isBack", false);
+        anim.SetBool("isLeft", false);
+        anim.SetBool("isRight", false);
+        // Pour faire regarder le fermier dans la bonne direction, il faut changer la valeur de "is..."
+        //qui convient en réécrivant une des lignes au dessus avec true à la place de false. De base il regarde en face.
+        //Je voyais bien soit il regarde dans la direction qu'il tire, soit dans la direction qu'il marche
+
+
+
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         if (Input.GetMouseButtonDown(0))
@@ -38,7 +52,7 @@ public class PlayerController : MonoBehaviour
             }
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (horizontal != 0 && vertical != 0) // Check for diagonal movement
     {
