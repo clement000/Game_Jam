@@ -54,9 +54,30 @@ public class GreenBlob_Behaviour : MonoBehaviour
         if (!isBeeingJumpedOn)
         {
             grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
+
             if (isIdle)
             {
-                if (jumpTimer > idleTime)//it is time to jump !
+                int xBlob, yBlob;
+                grid.GetXY(transform.position, out xBlob, out yBlob);
+                if (grid.value(xBlob, yBlob) < minimalDensityToSplit)
+                {
+                    if (canSplit)
+                    {
+                        Split();
+                        canSplit = false;
+                        splitTimer = 0f;
+                        splitTime = Random.Range(0.8f, 1.2f) * averageSplitTime;
+                    }
+                    else
+                    {
+                        if (splitTimer > splitTime)
+                        {
+                            canSplit = true;
+                        }
+                    }
+                    splitTimer += Time.deltaTime;//only increment the split timer if the blob is in a situation where he could split
+                }
+                else if (jumpTimer > idleTime)//it is time to jump !
                 {
                     jumpTimer = 0f;
                     isIdle = false;
@@ -86,26 +107,6 @@ public class GreenBlob_Behaviour : MonoBehaviour
                 {
                     Move(jumpVector);
                 }
-            }
-            int xBlob, yBlob;
-            grid.GetXY(transform.position, out xBlob, out yBlob);
-            if (grid.value(xBlob, yBlob) < minimalDensityToSplit)
-            {
-                if (canSplit)
-                {
-                    Split();
-                    canSplit = false;
-                    splitTimer = 0f;
-                    splitTime = Random.Range(0.8f, 1.2f) * averageSplitTime;
-                }
-                else
-                {
-                    if (splitTimer > splitTime)
-                    {
-                        canSplit = true;
-                    }
-                }
-                splitTimer += Time.deltaTime;//only increment the split timer if the blob is in a situation where he could split
             }
             jumpTimer += Time.deltaTime;
         }
@@ -189,6 +190,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private void Split()
     {
         anim.SetTrigger("divise");
+        jumpTimer = -2f;
         Invoke("EndSplit", 1.2f);
     }
     public void Jumped()
@@ -241,7 +243,6 @@ public class GreenBlob_Behaviour : MonoBehaviour
         Vector3 offset = new Vector3(0.1f, 0);
         newGreenBlob.transform.position = transform.position + offset;
         transform.position -= offset;
-        jumpTimer = -2f;
         newGreenBlob.GetComponent<GreenBlob_Behaviour>().jumpTimer = -2f;
     }
 }
