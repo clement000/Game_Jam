@@ -30,7 +30,6 @@ public class GreenBlob_Behaviour : MonoBehaviour
     private float distance;
 
     public bool blobWasInit = false;
-    public bool isDead = false;
 
     private Rigidbody2D GreenBlob;
 
@@ -126,10 +125,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     void Move(Vector2 translation2)
     {
         Vector2 velocity = translation2;
-        if (isDead)
-            GreenBlob.velocity = Vector2.zero;
-        else
-            GreenBlob.velocity = velocity;
+        GreenBlob.velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)//when colliding with a wall, bounce
@@ -240,11 +236,10 @@ public class GreenBlob_Behaviour : MonoBehaviour
 
     public void Kill()//kills the blob (with death animation)
     {
-        anim.SetTrigger("isDead");
-        isDead = true;
-        GetComponent<Collider2D>().enabled = false;
-        jumpTimer = -2f;
-        Invoke("RemoveBlob", 0.83f);
+        grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
+        grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbGreenBlob -= 1;
+        Destroy(GreenBlob.gameObject);
     }
 
     void EndSplit()
