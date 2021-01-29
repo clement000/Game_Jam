@@ -22,19 +22,24 @@ public class RedBlob_Behaviour : MonoBehaviour
     public bool isAbleToEat = true;
     private float timer = 0f, ableToEatTimer = 0f;
     private float idleTime, jumpDistance, jumpTheta, targetDistance;
+    Vector3 offset = new Vector3(0.2f, 0);
     Vector3 jumpVector;
     RaycastHit2D hit;
     private Rigidbody2D redBlob;
+
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
         redBlob = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (isIdle)
         {
             if (ableToEatTimer > ableToEatTime)
@@ -52,6 +57,7 @@ public class RedBlob_Behaviour : MonoBehaviour
                 timer = 0f;
                 if (possibleTarget != null)
                 {
+                    anim.SetBool("isAngry", true);
                     target = possibleTarget;
                     //Check if the target can be reached in 1 jump
                     targetDistance = Vector3.Distance(target.transform.position, transform.position);
@@ -88,8 +94,8 @@ public class RedBlob_Behaviour : MonoBehaviour
                 if (isChasing && target != null)
                 {
                     idleTime = Random.Range(0.5f, 0.75f) * averageIdleTime;// if the blob is chasing a target, it jumps faster
-                    Vector3 vector = target.transform.position - transform.position;
-                    if (vector.magnitude < 0.01 && target.gameObject.tag == "GreenBlob")
+                    Vector3 vector = target.transform.position - offset - transform.position;
+                    if (vector.magnitude < 0.04 && target.gameObject.tag == "GreenBlob")
                     {
                         Eat(target);
                         isAbleToEat = false;
@@ -99,6 +105,7 @@ public class RedBlob_Behaviour : MonoBehaviour
                 else
                 {
                     idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
+                    anim.SetBool("isAngry", false);
                 }
                 Move(new Vector2(0, 0));
                 isChasing = false;
@@ -147,11 +154,12 @@ public class RedBlob_Behaviour : MonoBehaviour
         redBlob.velocity = speed2D;
     }
 
-    public void unableToEat()
+    public void NewlySplitBlob()
     {
         isAbleToEat = false;
         this.ableToEatTime = Random.Range(0.8f,1.2f) * ableToEatTime;
         this.ableToEatTimer = 0f;
+        this.timer = -2f;
     }
 
     Vector3 JumpTowardsTargetInit(GameObject target)//jump towards the target, with a random jump distance
@@ -167,7 +175,7 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         target.GetComponent<GreenBlob_Behaviour>().Jumped();
         //initiate a jump that will land right next to the target
-        jumpVector = (target.transform.position - transform.position) / jumpDuration;
+        jumpVector = (target.transform.position - offset - transform.position) / jumpDuration;
         return jumpVector;
     }
 
@@ -185,10 +193,10 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         //play the animation
         target.GetComponent<GreenBlob_Behaviour>().RemoveBlob();
-        target = null;
-        RedBlob_Behaviour newRedBlob = Instantiate(redBlob).GetComponent<RedBlob_Behaviour>();
-        newRedBlob.transform.position = transform.position;
-        newRedBlob.unableToEat();
+        anim.SetTrigger("Eat");
+        Invoke("EndEat", 2.4f);
+        transform.position += offset / 2;
+        timer = -2f;
     }
 
     public void DamageBlob(float amount)
@@ -197,6 +205,7 @@ public class RedBlob_Behaviour : MonoBehaviour
         health -= amount;
         if (health < 0)
         {
+            anim.SetTrigger("Dead");
             Kill();
         }
     }
@@ -205,5 +214,13 @@ public class RedBlob_Behaviour : MonoBehaviour
     {
         //play the animation
         Destroy(redBlob.gameObject);
+    }
+
+    void EndEat()
+    {
+        RedBlob_Behaviour newRedBlob = Instantiate(redBlob).GetComponent<RedBlob_Behaviour>();
+        newRedBlob.transform.position = transform.position + offset / 2;
+        newRedBlob.NewlySplitBlob();
+        transform.position -= offset / 2;
     }
 }
