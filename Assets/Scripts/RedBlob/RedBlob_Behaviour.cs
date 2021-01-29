@@ -34,6 +34,7 @@ public class RedBlob_Behaviour : MonoBehaviour
         idleTime = Random.Range(0.5f, 1.5f) * averageIdleTime;
         redBlob = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbRedBlob += 1;
     }
 
     // Update is called once per frame
@@ -213,6 +214,8 @@ public class RedBlob_Behaviour : MonoBehaviour
     public void Kill()//kills the blob (with death animation)
     {
         //play the animation
+
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbRedBlob -= 1;
         Destroy(redBlob.gameObject);
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BulletCounter : MonoBehaviour
 {
     public Text bulletDisplay;
-    public int bulletNumber;
+    public int bulletNumber = 10;
 
     public int BulletNumber
     {
@@ -16,7 +16,6 @@ public class BulletCounter : MonoBehaviour
 
     private void Start()
     {
-        bulletNumber = 10;
     }
 
     private void Update()

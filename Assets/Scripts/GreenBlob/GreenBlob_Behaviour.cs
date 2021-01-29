@@ -46,6 +46,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
         lastIdleY = transform.position.y;
         splitTime = Random.Range(1.5f, 1) * averageSplitTime;
         anim = GetComponent<Animator>();
+
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbGreenBlob += 1;
     }
 
     // Update is called once per frame
@@ -218,6 +220,8 @@ public class GreenBlob_Behaviour : MonoBehaviour
     {
         grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
         grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbGreenBlob -= 1;
         Destroy(GreenBlob.gameObject);
     }
 
@@ -234,6 +238,7 @@ public class GreenBlob_Behaviour : MonoBehaviour
     {
         grid = GameObject.Find("GameSystem").GetComponent<GameSystem>().greenBlobHeatmap;
         grid.RemoveBlobFromHeatMap(new Vector3(lastIdleX, lastIdleY));
+        GameObject.Find("GameSystem").GetComponent<BlobCounter>().nbGreenBlob -= 1;
         Destroy(GreenBlob.gameObject);
     }
 

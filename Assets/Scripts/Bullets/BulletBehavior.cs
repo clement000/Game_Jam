@@ -21,9 +21,13 @@ public class BulletBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(gameObject);
-        if(other.CompareTag("Enemy") | other.CompareTag("GreenBlob"))
+        if(other.CompareTag("GreenBlob"))
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<GreenBlob_Behaviour>().DamageBlob(100);
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<RedBlob_Behaviour>().DamageBlob(100);
         }
     }
 }

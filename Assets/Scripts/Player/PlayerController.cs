@@ -43,27 +43,33 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        if (horizontal > 0) {
+        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 dir = Input.mousePosition - pos;
+        float mouseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        Debug.Log(mouseAngle);
+
+        if (mouseAngle > -45 && mouseAngle < 45) {
             anim.SetBool("isRight", true);
             anim.SetBool("isFront", false);
             anim.SetBool("isBack", false);
             anim.SetBool("isLeft", false);
         }
-        if (horizontal < 0)
+        if (mouseAngle > 135 || mouseAngle < -135)
         {
             anim.SetBool("isLeft", true);
             anim.SetBool("isFront", false);
             anim.SetBool("isBack", false);
             anim.SetBool("isRight", false);
         }
-        if (vertical < 0) 
+        if (mouseAngle < -45 && mouseAngle > -135) 
         {
             anim.SetBool("isFront", true);
             anim.SetBool("isLeft", false);
             anim.SetBool("isBack", false);
             anim.SetBool("isRight", false);
         }
-        if (vertical > 0) 
+        if (mouseAngle > 45 && mouseAngle < 135) 
         { 
             anim.SetBool("isBack", true);
             anim.SetBool("isFront", false);
